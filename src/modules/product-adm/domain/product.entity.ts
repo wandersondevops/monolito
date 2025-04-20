@@ -1,6 +1,5 @@
-import BaseEntity from "../../@shared/domain/entity/base.entity";
-import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
-import Id from "../../@shared/domain/value-object/id.value-object";
+import { Entity } from '@shared/domain/entity/entity';
+import { Id } from '@shared/domain/value-object/id.value-object';
 
 type ProductProps = {
   id?: Id;
@@ -12,7 +11,7 @@ type ProductProps = {
   updatedAt?: Date;
 };
 
-export default class Product extends BaseEntity implements AggregateRoot {
+export class Product extends Entity {
   private _name: string;
   private _description: string;
   private _purchasePrice: number;
@@ -46,15 +45,15 @@ export default class Product extends BaseEntity implements AggregateRoot {
     this._name = name;
   }
 
-  set stock(stock: number) {
-    this._stock = stock;
-  }
-
   set description(description: string) {
     this._description = description;
   }
 
   set purchasePrice(purchasePrice: number) {
     this._purchasePrice = purchasePrice;
+  }
+
+  set stock(stock: number) {
+    this._stock = stock;
   }
 }

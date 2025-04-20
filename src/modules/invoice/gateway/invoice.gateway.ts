@@ -1,4 +1,4 @@
-import { Invoice } from "../domain/entity/invoice";
+import { Invoice } from "../domain/invoice.entity";
 
 export interface InvoiceGateway {
   find(id: string): Promise<Invoice>;

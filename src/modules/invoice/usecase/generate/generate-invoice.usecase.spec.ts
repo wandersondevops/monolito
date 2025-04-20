@@ -1,4 +1,4 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
+import { Id } from "../../../@shared/domain/value-object/id.value-object";
 import { GenerateInvoiceUseCase } from "./generate-invoice.usecase";
 import { jest, describe, expect, it } from "@jest/globals";
 import { Invoice } from "../../domain/entity/invoice";

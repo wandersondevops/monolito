@@ -2,14 +2,35 @@ import { InvoiceFacade } from "./invoice.facade";
 import { FindInvoiceUseCase } from "../usecase/find/find-invoice.usecase";
 import { GenerateInvoiceUseCase } from "../usecase/generate/generate-invoice.usecase";
 import { InvoiceRepository } from "../repository/invoice.repository";
+import { InvoiceGateway } from "../gateway/invoice.gateway";
+import { Invoice } from "../domain/invoice.entity";
 import { jest, describe, expect, it, beforeEach } from "@jest/globals";
+import { Id } from "@shared/domain/value-object/id.value-object";
+
+// Create a mock implementation of InvoiceRepository
+class MockInvoiceRepository implements InvoiceGateway {
+  private invoices: Invoice[] = [];
+
+  async generate(invoice: Invoice): Promise<Invoice> {
+    this.invoices.push(invoice);
+    return invoice;
+  }
+
+  async find(id: string): Promise<Invoice> {
+    const invoice = this.invoices.find((invoice) => invoice.id.id === id);
+    if (!invoice) {
+      throw new Error('Invoice not found');
+    }
+    return invoice;
+  }
+}
 
 describe("Invoice Facade", () => {
-  let repository: InvoiceRepository;
+  let repository: MockInvoiceRepository;
   let facade: InvoiceFacade;
 
   beforeEach(() => {
-    repository = new InvoiceRepository();
+    repository = new MockInvoiceRepository();
     const findUseCase = new FindInvoiceUseCase(repository);
     const generateUseCase = new GenerateInvoiceUseCase(repository);
     facade = new InvoiceFacade({
@@ -30,12 +51,12 @@ describe("Invoice Facade", () => {
       zipCode: "12345-678",
       items: [
         {
-          id: "1",
+          id: `1-${Math.random().toString(36).substring(2, 9)}`,
           name: "Item 1",
           price: 100,
         },
         {
-          id: "2",
+          id: `2-${Math.random().toString(36).substring(2, 9)}`,
           name: "Item 2",
           price: 200,
         },
@@ -73,12 +94,12 @@ describe("Invoice Facade", () => {
       zipCode: "12345-678",
       items: [
         {
-          id: "1",
+          id: `1-${Math.random().toString(36).substring(2, 9)}`,
           name: "Item 1",
           price: 100,
         },
         {
-          id: "2",
+          id: `2-${Math.random().toString(36).substring(2, 9)}`,
           name: "Item 2",
           price: 200,
         },

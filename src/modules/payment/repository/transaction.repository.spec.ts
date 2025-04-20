@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
-import Id from "../../@shared/domain/value-object/id.value-object";
+import { Id } from "../../@shared/domain/value-object/id.value-object";
 import Transaction from "../domain/transaction";
 import TransactionModel from "./transaction.model";
 import TransactionRepostiory from "./transaction.repository";

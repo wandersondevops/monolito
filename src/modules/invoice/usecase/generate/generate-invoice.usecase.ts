@@ -1,6 +1,6 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
-import { Invoice } from "../../domain/entity/invoice";
-import { InvoiceItems } from "../../domain/entity/invoice-items";
+import { Id } from "../../../@shared/domain/value-object/id.value-object";
+import { Invoice } from "../../domain/invoice.entity";
+import { InvoiceItem } from "../../domain/invoice-item.entity";
 import { Address } from "../../domain/value-object/address";
 import { InvoiceGateway } from "../../gateway/invoice.gateway";
 
@@ -52,7 +52,7 @@ export class GenerateInvoiceUseCase {
     });
 
     const items = input.items.map(item => 
-      new InvoiceItems({
+      new InvoiceItem({
         id: new Id(item.id),
         name: item.name,
         price: item.price,

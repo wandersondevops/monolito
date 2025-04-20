@@ -1,7 +1,7 @@
 import { Invoice } from "./invoice";
 import { InvoiceItems } from "./invoice-items";
 import { Address } from "../value-object/address";
-import Id from "../../../@shared/domain/value-object/id.value-object";
+import { Id } from "../../../@shared/domain/value-object/id.value-object";
 import { jest, describe, expect, it } from "@jest/globals";
 
 describe("Invoice Entity", () => {

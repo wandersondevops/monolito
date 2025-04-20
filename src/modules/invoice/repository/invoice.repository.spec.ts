@@ -1,10 +1,18 @@
 import { InvoiceRepository } from "./invoice.repository";
-import { Invoice } from "../domain/entity/invoice";
-import Id from "../../@shared/domain/value-object/id.value-object";
+import { Invoice } from "../domain/invoice.entity";
+import { Id } from "../../@shared/domain/value-object/id.value-object";
 import { Address } from "../domain/value-object/address";
-import { InvoiceItems } from "../domain/entity/invoice-items";
+import { InvoiceItem } from "../domain/invoice-item.entity";
+import { sequelize, initDb } from "../../@shared/infra/db/sequelize";
 
 describe("Invoice Repository test", () => {
+  beforeAll(async () => {
+    await initDb();
+  });
+  
+  afterAll(async () => {
+    await sequelize.close();
+  });
   it("should create an invoice", async () => {
     const invoice = new Invoice({
       id: new Id("1"),
@@ -19,12 +27,12 @@ describe("Invoice Repository test", () => {
         zipCode: "12345-678",
       }),
       items: [
-        new InvoiceItems({
+        new InvoiceItem({
           id: new Id("1"),
           name: "Item 1",
           price: 100,
         }),
-        new InvoiceItems({
+        new InvoiceItem({
           id: new Id("2"),
           name: "Item 2",
           price: 200,

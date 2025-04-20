@@ -35,7 +35,7 @@ export class FindInvoiceUseCase {
       id: invoice.id.id,
       name: invoice.name,
       document: invoice.document,
-      address: invoice.address.toJSON(),
+      address: invoice.address,
       items: invoice.items.map(item => ({
         id: item.id.id,
         name: item.name,

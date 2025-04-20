@@ -1,4 +1,4 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
+import { Id } from "../../../@shared/domain/value-object/id.value-object";
 import { Address } from "../value-object/address";
 import { InvoiceItems } from "./invoice-items";
 
